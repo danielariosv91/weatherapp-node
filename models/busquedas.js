@@ -7,11 +7,25 @@ class Busquedas {
         //TODO: leer db si existe
     }
 
+    get paramsMapBox() {
+        return {
+            'access_token': 'pk.eyJ1IjoiZGFuaWliaWNoYWEiLCJhIjoiY2xsemJpaG94MDEwbzNjbTF1ZXdra2tyaiJ9.7BASe2XHNDQ_w3nlnMro9Q',
+            'limit': 5,
+            'language': 'es'
+        }
+    }
+
     async city(place = '') {
-  
+
         //http request
-        const response = await axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/Santiago.json?proximity=ip&access_token=pk.eyJ1IjoiZGFuaWliaWNoYWEiLCJhIjoiY2xsemJpaG94MDEwbzNjbTF1ZXdra2tyaiJ9.7BASe2XHNDQ_w3nlnMro9Q');
-        console.log(response) 
+        const instance = axios.create({
+            baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json`,
+            params: this.paramsMapBox
+        });
+
+        const response = await instance.get();
+
+        console.log(response.data)
 
         // retornar las ciudades 
         return [];
