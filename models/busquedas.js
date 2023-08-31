@@ -18,17 +18,25 @@ class Busquedas {
     async city(place = '') {
 
         //http request
-        const instance = axios.create({
-            baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json`,
-            params: this.paramsMapBox
-        });
+        try {
+            const instance = axios.create({
+                baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json`,
+                params: this.paramsMapBox
+            });
 
-        const response = await instance.get();
+            const response = await instance.get();
 
-        console.log(response.data)
-
+            return response.data.features.map(item => ({
+                id: item.id, 
+                name: item.place_name, 
+                lng: item.center[0], 
+                lat: item.center[1]
+            }))
+        } catch (error) {
+            return [];
+        }
         // retornar las ciudades 
-        return [];
+        //return [];
     }
 }
 
