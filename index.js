@@ -1,7 +1,7 @@
 import 'dotenv/config.js';
 
 import { inquirerMenu, leerInput, pausa, placesList } from './helpers/inquirer.js'
-import Searching from './models/busquedas.js';
+import Searching from './models/searching.js';
 
 const main = async () => {
     const searching = new Searching();
@@ -20,9 +20,15 @@ const main = async () => {
 
                 // select place
                 const id = await placesList(places);
+
+                if (id === '0') continue;
+
                 const selectedPlace = places.find(place => place.id === id);
 
-                // get weather 
+                /** Save place selected */
+                searching.addHistorySearch(selectedPlace.name);
+
+                /** Get Weather */
                 const weather = await searching.weatherPlace(selectedPlace.lat, selectedPlace.lng);
 
                 console.log('City Info');
@@ -32,6 +38,12 @@ const main = async () => {
                 console.log('Temperature:' + weather.temperature);
                 console.log('Minimun: ' + weather.min);
                 console.log('Máximun: ' + weather.max);
+                break;
+            case 2:
+                searching.historial.forEach((place, i) => {
+                    console.log(`${i + 1} ${place}`)
+                })
+
                 break;
         }
 

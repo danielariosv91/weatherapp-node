@@ -9,15 +9,15 @@ const preguntas = [
         choices: [
             {
                 value: 1,
-                name: `${ '1.'.green } Buscar ciudad`
+                name: `${ '1.' } Buscar ciudad`
             },
             {
                 value: 2,
-                name: `${ '2.'.green } Historial`
+                name: `${ '2.' } Historial`
             },
             {
                 value: 3,
-                name: `${ '3.'.green } Salir`
+                name: `${ '3.' } Salir`
             },
         ]
     }
@@ -28,9 +28,9 @@ const preguntas = [
 const inquirerMenu = async() => {
 
     console.clear();
-    console.log('=========================='.green);
-    console.log('  Seleccione una opción'.white );
-    console.log('==========================\n'.green);
+    console.log('==========================');
+    console.log('  Seleccione una opción' );
+    console.log('==========================\n');
 
     const { opcion } = await inquirer.prompt(preguntas);
 
@@ -43,7 +43,7 @@ const pausa = async() => {
         {
             type: 'input',
             name: 'enter',
-            message: `Presione ${ 'enter'.green } para continuar`
+            message: `Presione ${ 'enter' } para continuar`
         }
     ];
 
@@ -118,7 +118,7 @@ const mostrarListadoChecklist = async( tareas = [] ) => {
 
     const choices = tareas.map( (tarea, i) => {
 
-        const idx = `${i + 1}.`.green;
+        const idx = `${i + 1}.`;
 
         return {
             value: tarea.id,

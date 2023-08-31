@@ -1,7 +1,9 @@
+import fs from 'fs';
 import axios from 'axios'
 
 class Searching {
-    historial = ['Santiago', 'Madrid', 'Estocolmo'];
+    historial = [];
+    databasePath = './database/database.json'
 
     constructor() {
         //TODO: leer db si existe
@@ -54,15 +56,31 @@ class Searching {
             const { weather, main } = response.data;
 
             return {
-                descripcion: weather.description, 
-                min: main.temp_min, 
-                max: main.temp_max, 
+                descripcion: weather.description,
+                min: main.temp_min,
+                max: main.temp_max,
                 temperature: main.temp
             }
 
         } catch (error) {
 
         }
+    }
+
+    addHistorySearch = (place = '') => {
+        if (this.historial.includes(place.toLowerCase())) return;
+
+        this.historial.unshift(place);
+
+        this.saveOnDatabase();
+    }
+
+    saveOnDatabase = () => {
+        const payload = {
+            historial: this.historial
+        }
+
+        fs.writeFileSync(this.databasePath, JSON.stringify(payload))
     }
 }
 
