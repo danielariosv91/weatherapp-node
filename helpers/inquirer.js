@@ -5,19 +5,19 @@ const preguntas = [
     {
         type: 'list',
         name: 'opcion',
-        message: '¿Qué desea hacer?',
+        message: 'What do want to do?',
         choices: [
             {
                 value: 1,
-                name: `${ '1.' } Buscar ciudad`
+                name: `${ '1.' } Search city`
             },
             {
                 value: 2,
-                name: `${ '2.' } Historial`
+                name: `${ '2.' } History`
             },
             {
                 value: 3,
-                name: `${ '3.' } Salir`
+                name: `${ '3.' } Exit`
             },
         ]
     }

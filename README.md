@@ -56,5 +56,3 @@ npm start
 
 - [Axios](https://axios-http.com/): A promise-based HTTP client for making API requests.
 - [dotenv](https://github.com/motdotla/dotenv): A module to load environment variables from a `.env` file.
-
-
