@@ -6,7 +6,7 @@ class Searching {
     databasePath = './database/database.json'
 
     constructor() {
-        //TODO: leer db si existe
+        this.readDatabase();
     }
 
     get paramsMapBox() {
@@ -56,7 +56,7 @@ class Searching {
             const { weather, main } = response.data;
 
             return {
-                descripcion: weather.description,
+                description: weather.description,
                 min: main.temp_min,
                 max: main.temp_max,
                 temperature: main.temp
@@ -81,6 +81,18 @@ class Searching {
         }
 
         fs.writeFileSync(this.databasePath, JSON.stringify(payload))
+    }
+
+    readDatabase = () => {
+
+        /** If database or file exists */
+        if (!fs.existsSync(this.databasePath)) return;
+
+        /** Read file */
+        const info = fs.readFileSync(this.databasePath, { encoding: 'utf-8' }); 
+        const data = JSON.parse(info);
+
+        this.historial = data.historial;
     }
 }
 
